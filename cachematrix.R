@@ -9,35 +9,31 @@
 ## 3. set the inverse
 ## 4. get the inverse
 
-## define makeCacheMatrix as a function about a matrix
 makeCacheMatrix <- function(x = matrix()) {
+        ## define makeCacheMatrix as a function about a matrix
         i <- NULL 
         set <- function(y) {
-## assign a value to an object in an environment different from the current environment
                 x <<- y 
                 i <<- NULL
+                ## assign a value to an object in an environment different from the current environment
         }
         get <- function() x
         setinverse <- function(inverse) i <<- inverse
         getinverse <- function() i
-## return a list to 
-## 1. set the matrix
-## 2. get the matrix 
-## 3. set the inverse
-## 4. get the inverse
-             list(set = set, get = get,
+        list(set = set, 
+             get = get,
              setinverse = setinverse,
              getinverse = getinverse)
 }
 
 
 ## Write a short comment describing this function
-## x is the output of makeCacheMatrix()
+## cacheSolve is a function that computes the output of makeCacheMatrix
 cacheSolve <- function(x, ...) {
-       i <- x$getinverse() ## return the inverse of the original matrix input to makeCacheMatrix
-        if(!is.null(i)) {
-                message("getting cached data")
-                return(i)
+       i <- x$getinverse() 
+        if(!is.null(i)) { ## if the inverse of the original matrix has already been stored in cache
+                message("getting cached data") ## return the message "getting cached data"
+                return(i)  ## and the inverse   
         }
         data <- x$get()
         i <- solve(data, ...)
